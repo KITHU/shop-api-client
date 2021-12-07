@@ -5,12 +5,19 @@ import { useForm } from "react-hook-form";
 
 function Register() {
     const { register, handleSubmit } = useForm();
-    const onSubmit = data => console.log(data);
-    const [user, setuser] = useState([])
+    const onSubmit = data => {
+        axios.post('https://shop-api-v1.herokuapp.com/api/v1/auth/login/', data)
+        .then(res =>{
+            console.log(res.data)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    };
     return (
         <>
         <h1>Register</h1>
-        
+
         <form onSubmit={handleSubmit(onSubmit)}>
             <label htmlFor="email">Email:</label>
             <input {...register("email")} id="email" />
